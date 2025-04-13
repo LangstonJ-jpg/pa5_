@@ -79,11 +79,39 @@ int max_num_prefix_words(TrieNode *node) {
     // the maximum number of words that are
     // prefixes of a single word.
 
+        // check if the node is null before operation
+        if(node == NULL){
+            // end operation if null
+            return 0;
+        }
+        
+        int count = node->is_terminal; // counter that counts # of terminal nodes
+    
+        int prefix_count = 0;  // counter for the # of prefix words
+        
+        // traverse through all child nodes
+        for(int i = 0; i < LETTER_COUNT; i++){
+    
+            // check if the child nodes are present
+            if(node->children[i] != NULL){
+                
+                // recursively count the number of child nodes
+                int child_count = max_num_prefix_words(node->children[i]);
+    
+                // update the max count
+                if(child_count > prefix_count){
+                    prefix_count = child_count;
+                }
+            }
+    
+        }
 
-
-
-
-
+        // add the count of the current node and the prefix count
+        count += prefix_count;
+    
+        // return the total count of terminal nodes
+        return count;
+    
 
     // TODO END
 }

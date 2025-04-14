@@ -95,22 +95,20 @@ int max_num_prefix_words(TrieNode *node) {
             // check if the child nodes are present
             if(node->children[i] != NULL){
                 
-                // recursively count the number of child nodes
+                // recursively count the number prefix words in child nodes
                 int child_count = max_num_prefix_words(node->children[i]);
     
-                // update the max count
+                // update the prefix count if child_count is greater
                 if(child_count > prefix_count){
                     prefix_count = child_count;
                 }
+
             }
     
         }
-
-        // add the count of the current node and the prefix count
-        count += prefix_count;
     
-        // return the total count of terminal nodes
-        return count;
+        // return the total count of terminal nodes and prefix words
+        return count + prefix_count;
     
 
     // TODO END
